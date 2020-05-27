@@ -1,0 +1,39 @@
+﻿@page
+@model Photos_Apsnet.PhotoViewModel
+@{
+    ViewData["Title"] = "PhotoView";
+}
+
+<h1>PhotoView</h1>
+
+<div>
+    <p>Properties:</p>
+    <ul>
+        @foreach (string prop in Model.Properties)
+        {
+            <li>@Html.DisplayFor(modelItem=>prop)</li>
+        }
+    </ul>
+    <form>
+       <input type="text" name="search" />
+        <input type="submit" />
+    </form>
+    <div>
+        <p>Number of Photos:@Html.DisplayFor(model=>model.Count)</p>
+        @foreach(var photo in Model.PhotosFiltered)
+        {
+            <div class="container">
+                <p>@Html.DisplayFor(model=>photo.Titlu)</p>
+                <img src="@Url.Content(photo.Path)" alt="poza" />
+                <p>Eveniment: @Html.DisplayFor(model=>photo.Eveniment)</p>
+                <p>Descriere: @Html.DisplayFor(model=>photo.Descriere)</p>
+                <ul>
+                    @foreach( string prop in photo.Other)
+                    {
+                        <li>@Html.DisplayFor(model=>prop)</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
